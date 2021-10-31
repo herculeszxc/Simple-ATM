@@ -39,6 +39,8 @@ namespace atmachine
             int checking = 500000;
             int credit = 200000;
 
+            //int newSavings = savingsWithdraw(savings);
+
             if (x == 1)
             {
                 //withdrawal
@@ -49,7 +51,7 @@ namespace atmachine
             {
                 //balance inq
                 Console.Clear();
-                balanceinq(savings, checking, credit);
+                balanceinq(checking, credit, savings);
             }
             else
             {
@@ -58,7 +60,7 @@ namespace atmachine
             }
 
             // WITHDRAWAL
-            static int withdraw(int savings, int checking, int credit)
+            static void withdraw(int savings, int checking, int credit)
             {
                 Console.WriteLine("************************************");
                 Console.WriteLine(">1. SAVING ACCOUNT");
@@ -68,104 +70,51 @@ namespace atmachine
                 Console.WriteLine("CHOOSE 1 - 3 ");
 
                 int x = Convert.ToInt32(Console.ReadLine());
-
-                int amount;
                 if (x == 1)
                 {
                     Console.Clear();
-                    Console.WriteLine("ENTER AMOUNT: ");
-                    amount = Convert.ToInt32(Console.ReadLine());
-                    savings = amount - savings;
-
-                    if (amount >= savings)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("WOULD YOU LIKE TO ANOTHER TRANSACT? Y/N");
-                        String trans = Convert.ToString(Console.ReadLine());
-                            if (trans == "Y" || trans == "y")
-                            {
-                                Console.Clear();
-                                mainmenu();
-                            }
-                            else if (trans == "N" || trans == "n")
-                            {
-                                Console.Clear();
-                                Console.WriteLine("THANK YOU! COME AGAIN!");
-                            }
-                            else
-                            {
-                                Console.Clear();
-                                Console.WriteLine("INVALID TRANSACTION");
-                            }
-                    }
-                    
-
+                    savingsWithdraw(savings);
                 }
-                else if (x == 2)
+            }
+
+            // WITHDRAW SAVINGS
+            static int savingsWithdraw(int savings)
+            {
+                Console.Clear();
+                Console.WriteLine("ENTER AMOUNT: ");
+                int amount;
+                amount = Convert.ToInt32(Console.ReadLine());
+
+                savings = amount - savings;
+                    
+                if (amount <= savings)
                 {
                     Console.Clear();
-                    Console.WriteLine("ENTER AMOUNT: ");
-                    amount = Convert.ToInt32(Console.ReadLine());
-                    savings = amount - checking;
-                    if (amount >= checking)
+                    Console.WriteLine("WOULD YOU LIKE TO ANOTHER TRANSACT? Y/N");
+                    String trans = Convert.ToString(Console.ReadLine());
+                    if (trans == "Y" || trans == "y")
                     {
                         Console.Clear();
-                        Console.WriteLine("WOULD YOU LIKE TO ANOTHER TRANSACT? Y/N");
-                        String trans = Convert.ToString(Console.ReadLine());
-                        if (trans == "Y" || trans == "y")
-                        {
-                            Console.Clear();
-                            mainmenu();
-                        }
-                        else if (trans == "N" || trans == "n")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("THANK YOU! COME AGAIN!");
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("INVALID TRANSACTION");
-                        }
+                        mainmenu();
                     }
-                }else if (x == 3)
-                {
-                    Console.Clear();
-                    Console.WriteLine("ENTER AMOUNT: ");
-                    amount = Convert.ToInt32(Console.ReadLine());
-                    savings = amount - credit;
-                    if (amount >= credit)
+                    else if (trans == "N" || trans == "n")
                     {
                         Console.Clear();
-                        Console.WriteLine("WOULD YOU LIKE TO ANOTHER TRANSACT? Y/N");
-                        String trans = Convert.ToString(Console.ReadLine());
-                        if (trans == "Y" || trans == "y")
-                        {
-                            Console.Clear();
-                            mainmenu();
-                        }
-                        else if (trans == "N" || trans == "n")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("THANK YOU! COME AGAIN!");
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("INVALID TRANSACTION");
-                        }
+                        Console.WriteLine("THANK YOU! COME AGAIN!");
                     }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("INVALID TRANSACTION");
+                    }
+
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("INVALID TRANSACTION");
-                    mainmenu();
+                    Console.WriteLine("INSUFFICIENT BALANCE");
                 }
-
                 return savings;
-                return credit;
-                return checking;
             }
             // BALANCE INQUIRY
             static void balanceinq(int savings, int checking, int credit)
@@ -173,7 +122,7 @@ namespace atmachine
                 Console.WriteLine("************************************");
                 Console.WriteLine(">1. SAVING ACCOUNT");
                 Console.WriteLine(">2. CHECKING ACCOUNT");
-                Console.WriteLine(">3. CREDIT CARD ACCOUNT");
+                Console.WriteLine(">3. CREDIT CARD ACCOUNT"); 
                 Console.WriteLine("************************************");
                 Console.WriteLine("CHOOSE 1 - 3 ");
 
@@ -200,49 +149,7 @@ namespace atmachine
                         Console.Clear();
                         Console.WriteLine("INVALID TRANSACTION");
                     }
-                } else if (y == 2)
-                {
-                    Console.Clear();
-                    Console.WriteLine("CHECKING ACCOUNT BALANCE: " + checking);
-                    Console.WriteLine("\nWOULD YOU LIKE TO ANOTHER TRANSACT? Y/N");
-                    String trans = Convert.ToString(Console.ReadLine());
-                    if (trans == "Y" || trans == "y")
-                    {
-                        Console.Clear();
-                        mainmenu();
-                    }
-                    else if (trans == "N" || trans == "n")
-                    {
-                        Console.Clear();
-                        Console.WriteLine("THANK YOU! COME AGAIN!");
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("INVALID TRANSACTION");
-                    }
-                } else if (y == 3)
-                {
-                    Console.Clear();
-                    Console.WriteLine("CREDIT CARD ACCOUNT BALANCE: " + credit);
-                    Console.WriteLine("\nWOULD YOU LIKE TO ANOTHER TRANSACT? Y/N");
-                    String trans = Convert.ToString(Console.ReadLine());
-                    if (trans == "Y" || trans == "y")
-                    {
-                        Console.Clear();
-                        mainmenu();
-                    }
-                    else if (trans == "N" || trans == "n")
-                    {
-                        Console.Clear();
-                        Console.WriteLine("THANK YOU! COME AGAIN!");
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("INVALID TRANSACTION");
-                    }
-                }
+                 }
                 else
                 {
                     Console.Clear();
